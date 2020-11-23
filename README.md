@@ -1,16 +1,15 @@
 ## 我的社区
 
 ## 资料
-https://spring.io/guides
+[Spring 文档](https://spring.io/guides)
+
 https://spring.io/guides/gs/serving-web-content/
 
 ## 工具
-<<<<<<< HEAD
 - IDEA
 - Git
 - MyBaties
-=======
->>>>>>> 16be387b80bd7e59575beb6427eeabe67cd76e60
+
 
 ## 这是一款论坛，基于SpringBoot
 ``` java
