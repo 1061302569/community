@@ -13,24 +13,18 @@
 
 
 ## 这是一款论坛，基于SpringBoot
-``` java
-package com.chu.community.community.controller;
+``` sql
+-- auto-generated definition
+create table USER
+(
+  ID           INTEGER default NEXT VALUE FOR "PUBLIC"."SYSTEM_SEQUENCE_D10380C6_75D8_4B27_A6B1_97B4A8F7A441"
+    primary key,
+  ACCOUNT_ID   VARCHAR(100),
+  NAME         VARCHAR(50),
+  TOKEN        CHAR(36),
+  GMT_CREATE   BIGINT,
+  GMT_MODIFIED BIGINT
+);
 
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-
-/**
- *  made in 2020年11月22日
- */
-@Controller
-public class HelloController {
-    @GetMapping("/hello")
-    public String hello(@RequestParam( name = "name") String name, Model model){
-        model.addAttribute("name",name);
-        return "hello";
-    }
-}
 
 ```
