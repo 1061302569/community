@@ -11,16 +11,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.UUID;
 
 @Controller
 public class AuthorzeController {
     @Autowired
     private GitHubProvider gitHubProvider;
-
-    @Autowired
-    private UserMapper userMapper;
 
     @Value( "${github.client.id}" )
     private String clientId;
@@ -31,10 +30,14 @@ public class AuthorzeController {
     @Value( "${github.redirect.uri}" )
     private String redirectUri;
 
+    @Autowired
+    private UserMapper userMapper;
+
     @GetMapping("/callback")
     public String callback(@RequestParam(name="code") String code,
                            @RequestParam(name="state") String state,
-                           HttpServletRequest request
+                           HttpServletRequest request,
+                           HttpServletResponse response
                             ){
         AccessTokenDTO accessTokenDTO = new AccessTokenDTO();
         accessTokenDTO.setClient_id(clientId);
@@ -47,14 +50,16 @@ public class AuthorzeController {
         System.out.println(gitHubProviderUser.getName());
         if(gitHubProviderUser != null){
             User user = new User();
-            user.getToken( UUID.randomUUID().toString() );
-            user.getName(gitHubProviderUser.getName());
-            user.getAccountId(gitHubProviderUser.getId());
-            user.getGmtCreate(System.currentTimeMillis());
-            user.getGmtModified(user.getGmtCreate( System.currentTimeMillis() ));
+            String token = UUID.randomUUID().toString();
+            user.setToken( token );
+            user.setName(gitHubProviderUser.getName());
+            user.setAccountId( String.valueOf(gitHubProviderUser.getId()));
+            user.setGmtCreate(System.currentTimeMillis());
+            user.setGmtModified(user.getGmtCreate(System.currentTimeMillis()));
             userMapper.insert( user );
-            //登录成功,写cookie和session
-            request.getSession().setAttribute( "user",gitHubProviderUser );
+            response.addCookie(new Cookie( "token",token ) );
+            /*//登录成功,写cookie和session
+            request.getSession().setAttribute( "user",gitHubProviderUser );*/
             return "redirect:/";
         }else{
             return "redirect:/";
