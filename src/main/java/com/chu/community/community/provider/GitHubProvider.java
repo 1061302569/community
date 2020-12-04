@@ -30,7 +30,7 @@ public class GitHubProvider {
             String[] split = string.split( "&" );
             String tokenStr = split[0];
             String token = tokenStr.split( "=" )[1];
-            System.out.println(token);
+            //System.out.println(token);
             return token;
         } catch (Exception e) {
             e.printStackTrace();

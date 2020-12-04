@@ -55,7 +55,8 @@ public class AuthorzeController {
             user.setName(gitHubProviderUser.getName());
             user.setAccountId( String.valueOf(gitHubProviderUser.getId()));
             user.setGmtCreate(System.currentTimeMillis());
-            user.setGmtModified(user.getGmtCreate(System.currentTimeMillis()));
+            user.setGmtModified(user.getGmtCreate());
+            user.setAvatarUrl( gitHubProviderUser.getAvatar_url() );
             userMapper.insert( user );
             response.addCookie(new Cookie( "token",token ) );
             /*//登录成功,写cookie和session

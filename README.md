@@ -13,6 +13,7 @@
 
 
 ## 这是一款论坛，基于SpringBoot
+![image](https://github.com/1061302569/community/tree/main/src/main/resources/static/img/project.png)
 ``` sql
 -- auto-generated definition
 create table USER
