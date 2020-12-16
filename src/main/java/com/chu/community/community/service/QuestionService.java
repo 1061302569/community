@@ -42,4 +42,26 @@ public class QuestionService {
         paginlationDTO.setPagination(totalCount,page,size);
         return paginlationDTO;
     }
+
+    public PaginlationDTO list(Integer userId, Integer page, Integer size) {
+        //分页 size*(page-1)
+        Integer offset = size * (page - 1);
+
+        List<Question> questions = questionMapper.listByUserId(userId,offset,size);
+        List<QuestionDTO> questionDTOList = new ArrayList<>(  );
+
+        PaginlationDTO paginlationDTO = new PaginlationDTO();
+        for (Question question : questions) {
+            User user = userMapper.findById(question.getCreator());
+            QuestionDTO questionDTO = new QuestionDTO();
+            //把question对象copy到questionDTO
+            BeanUtils.copyProperties( question,questionDTO );
+            questionDTO.setUser(user);
+            questionDTOList.add( questionDTO );
+        }
+        paginlationDTO.setQuestion( questionDTOList );
+        Integer totalCount = questionMapper.countByUserId(userId);
+        paginlationDTO.setPagination(totalCount,page,size);
+        return paginlationDTO;
+    }
 }

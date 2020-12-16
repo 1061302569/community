@@ -21,7 +21,7 @@ public class PaginlationDTO {
 
     public void setPagination(Integer totalCount, Integer page, Integer size) {
         //算出总页数，有余数加1
-        Integer totalPage;
+        //Integer totalPage;
         if (totalCount % size == 0) {
             totalPage = totalCount / size;
         } else {
@@ -69,7 +69,7 @@ public class PaginlationDTO {
         }
 
         //是否展示最后一页
-        if (pages.contains( totalCount )) {
+        if (pages.contains( totalPage )) {
             showEndPage = false;
         } else {
             showEndPage = true;
