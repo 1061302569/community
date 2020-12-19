@@ -8,8 +8,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.servlet.http.HttpServletRequest;
-
 /**
  * made in 2020年11月22日
  */
@@ -20,7 +18,6 @@ public class IndexController {
 
     @GetMapping("/")
     public String index(
-            HttpServletRequest request,
             Model model,
             @RequestParam(value="page",defaultValue = "1") Integer page,
             @RequestParam(value="size",defaultValue = "5") Integer size
