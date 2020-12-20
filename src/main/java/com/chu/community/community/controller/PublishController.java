@@ -5,6 +5,7 @@ import com.chu.community.community.mapper.QuestionMapper;
 import com.chu.community.community.mapper.UserMapper;
 import com.chu.community.community.model.Question;
 import com.chu.community.community.model.User;
+import com.chu.community.community.model.UserExample;
 import com.chu.community.community.service.QuestionService;
 import com.chu.community.community.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @Controller
 public class PublishController {
@@ -78,8 +80,13 @@ public class PublishController {
             for (Cookie cookie : cookies) {
                 if (cookie.getName().equals( "token" )) {
                     String token = cookie.getValue();
-                    user = userMapper.findByToken( token );
-                    if (user != null) {
+                    UserExample userExample = new UserExample();
+                    userMapper.selectByExample( userExample );
+                    userExample.createCriteria()
+                            .andTokenEqualTo( token );
+                    List<User> users = userMapper.selectByExample( userExample );
+                    //user = userMapper.findByToken( token );
+                    if (users.size() != 0) {
                         request.getSession().setAttribute( "user", user );
                     }
                     break;
