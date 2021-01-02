@@ -67,3 +67,13 @@ body{
 .menu .icon:hover{
     color: #499ef3;
 }
+.question-tag{
+    margin-right: 5px;
+}
+.question-related{
+    padding-left: 0;
+    margin-left: 0;
+    font-size: 12px;
+    line-height: 20px;
+    list-style: none;
+}

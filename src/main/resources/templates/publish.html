@@ -6,7 +6,9 @@
     <link rel="stylesheet" href="/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/bootstrap-theme.min.css">
     <link rel="stylesheet" href="/css/community.css">
-    <script src="../static/js/bootstrap.min.js"></script>
+    <script src="/js/jquery-3.5.1.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/community.js" type="application/javascript"></script>
 </head>
 <body>
 
@@ -33,7 +35,33 @@
 
                 <div class="form-group">
                     <label for="tag">添加标签:</label>
-                    <input type="text" class="form-control" id="tag" name="tag" placeholder="输入标签以，分隔" th:value="${tag}">
+                    <input type="text" class="form-control" id="tag" name="tag" placeholder="输入标签以，分隔" th:value="${tag}" autocomplete="off">
+                    <div>
+                        <div>
+
+                            <!-- Nav tabs -->
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">开发语言</a></li>
+                                <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">平台框架</a></li>
+                                <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">服务器</a></li>
+                                <li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">其他</a></li>
+                            </ul>
+
+                            <!-- Tab panes -->
+                            <div class="tab-content">
+                                <div role="tabpanel" class="tab-pane active" id="home">
+                                    <span class="label label-info"><span class="glyphicon glyphicon-tags" onclick="selectTag('Java')">Java</span></span>
+                                </div>
+                                <div role="tabpanel" class="tab-pane" id="profile">
+                                    <span class="label label-info"><span class="glyphicon glyphicon-tags" onclick="selectTag('Spring')">Spring</span></span>
+                                    <span class="label label-info"><span class="glyphicon glyphicon-tags" onclick="selectTag('Mybatis')">Mybatis</span></span>
+                                </div>
+                                <div role="tabpanel" class="tab-pane" id="messages">...</div>
+                                <div role="tabpanel" class="tab-pane" id="settings">...</div>
+                            </div>
+
+                        </div>
+                    </div>
                 </div>
                 <span class="alert alert-danger" th:text="${error}"></span>
                 <button type="submit" class="btn btn-success btn-pubulish">发布</button>
