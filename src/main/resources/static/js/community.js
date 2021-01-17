@@ -33,7 +33,8 @@ function post() {
 }
 
 
-function selectTag(value){
+function selectTag(e){
+    var value = e.getAttribute("data-tag");
     var previous = $("#tag").val();
     if (previous.indexOf(value) == -1) {
         if (previous) {
@@ -42,5 +43,9 @@ function selectTag(value){
             $("#tag").val(value);
         }
     }
+}
 
+//标签点击事件
+function showSelectTag(){
+    $("#select-tag").show();
 }
